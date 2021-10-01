@@ -1,9 +1,11 @@
-const express = require('express');
-const mongoose = require('mongoose')
-const userAuthRoutes = require('./Routes/userAuthRoute')
+import express from 'express';
+import mongoose from 'mongoose';
+import userAuthRoutes from './Routes/userAuthRoute.js'
+import uploadRoutes from './Routes/uploadRoute.js'
+
 const app = express();
 
-const PORT = 4000;
+const PORT = 3000;
 
 app.listen(PORT);
 
@@ -23,3 +25,4 @@ app.get('/', (req,res) => {
 })
 
 app.use('/userAuth', userAuthRoutes);
+app.use('/upload', uploadRoutes)
