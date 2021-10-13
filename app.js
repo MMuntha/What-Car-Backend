@@ -11,6 +11,8 @@ app.listen(PORT);
 
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
+app.use(express.static('public'));
+
 
 const dbURI = 'mongodb+srv://dude:Munthasir911@cluster0.vonyr.mongodb.net/WhatCar?retryWrites=true&w=majority';
 
