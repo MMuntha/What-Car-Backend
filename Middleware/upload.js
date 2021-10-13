@@ -10,6 +10,8 @@ const fileFilter = (req, file, cb) => {
     else
     {
 
+        req.fileValidationError = 'Invalid image type';
+
         return cb(null, false, new Error('Invalid image type'));
 
     }
