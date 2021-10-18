@@ -63,6 +63,32 @@ const predict = async(req, res) => {
 
 }
 
+const allPost = async(req, res) => {
+
+    try{
+        const posts = await Post.find()
+        res.status(200).json({posts: posts})
+        console.log(posts)
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+
+const vehiDetail = async(req, res) => {
+
+    const id = req.body.id
+    console.log(id)
+
+    try{
+        const result = await Post.findById(id)
+        res.status(200).json({detail: result})
+    }
+    catch(err) {
+        console.log(err)
+    }
+}
+
 const addPost = async(req, res) => {
 
      try{
@@ -77,7 +103,7 @@ const addPost = async(req, res) => {
             yom : req.body.yom,
             milage : req.body.milage,
             transmission : req.body.transmission,
-            fueltype : req.body.fueltype,
+            fueltype : req.body.fuelType,
             image: fname,
             price : req.body.price,
             postedBy : req.body.postedBy,
@@ -104,7 +130,9 @@ const addPost = async(req, res) => {
 
 export default{
     predict,
-    addPost
+    addPost,
+    allPost,
+    vehiDetail
 }
 
 
