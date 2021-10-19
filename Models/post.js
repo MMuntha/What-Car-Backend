@@ -51,6 +51,10 @@ const postSchema = new Schema({
     },
     location: {
         type : String
+    },
+    userId: {
+        type: String,
+        required: true
     }
 }, {timestamps: true})
 

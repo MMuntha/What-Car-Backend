@@ -29,6 +29,10 @@ const userSchema = new Schema({
         required : true,
         minlength: 10,
         maxlength: 12
+    },
+    no_of_posts : {
+        type: Number,
+        default: 0
     }
 
 }, {timestamps: true})

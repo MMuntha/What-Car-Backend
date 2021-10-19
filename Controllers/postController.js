@@ -1,6 +1,7 @@
 import FormData from 'form-data'
 import fetch from 'node-fetch'
 import Post from '../Models/post.js'
+import User from '../Models/user.js'
 import sharp from 'sharp'
 
 const upload_image = async(image) => {
@@ -107,6 +108,7 @@ const addPost = async(req, res) => {
             image: fname,
             price : req.body.price,
             postedBy : req.body.postedBy,
+            userId: req.body.userId,
             contact : req.body.contact,
             location : req.body.location
         })
@@ -115,6 +117,13 @@ const addPost = async(req, res) => {
             await post.save();
             res.status(200).json({message: 'success'})
             console.log('success')
+
+            try{
+                await User.findOneAndUpdate({_id : post.userId}, {$inc : {no_of_posts : 1}})
+            }
+            catch(err){
+                console.log(err)
+            }
         }
         catch(err){
             console.log(err)
@@ -127,6 +136,8 @@ const addPost = async(req, res) => {
 
 
 }
+
+
 
 export default{
     predict,
