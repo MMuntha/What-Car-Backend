@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import userAuthRoutes from './Routes/userAuthRoute.js'
 import uploadRoutes from './Routes/uploadRoute.js'
+import generalRoutes from './Routes/generalRoute.js'
 import {Server} from 'socket.io'
 import User from './Models/user.js'
 
@@ -30,6 +31,7 @@ app.get('/', (req,res) => {
 
 app.use('/userAuth', userAuthRoutes);
 app.use('/upload', uploadRoutes)
+app.use('/general', generalRoutes)
 
 const io = new Server(server)
 

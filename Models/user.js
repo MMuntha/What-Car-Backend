@@ -33,7 +33,13 @@ const userSchema = new Schema({
     no_of_posts : {
         type: Number,
         default: 0
-    }
+    },
+    comments : [{
+        
+        commentedBy: String,
+        commentedById: String,
+        comment: String
+    }]
 
 }, {timestamps: true})
 

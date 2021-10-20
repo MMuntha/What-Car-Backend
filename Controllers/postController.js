@@ -137,13 +137,28 @@ const addPost = async(req, res) => {
 
 }
 
+const findAllById = async(req, res) => {
+    // searching all the vehicles of a user
+
+    const id = req.body.id;
+
+    try{
+        const result = await Post.find({userId: id})
+
+        res.status(200).json({posts: result})
+    }
+    catch(err){
+        console.log(err)
+    }
+}
 
 
 export default{
     predict,
     addPost,
     allPost,
-    vehiDetail
+    vehiDetail,
+    findAllById
 }
 
 
