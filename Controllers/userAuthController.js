@@ -1,4 +1,6 @@
 import User from '../Models/user.js'
+import sharp from 'sharp'
+
 
 const handleErrors = (err) => {
     console.log(err)
@@ -35,19 +37,65 @@ const handleErrors = (err) => {
     return errors
 }
 
+const upload_image = async(image) => {
+
+    let fname = "";
+
+    try{
+
+        const name = Date.now() + '-' + Math.round(Math.random() * 1E9)
+        fname = name + '-' + image.originalname
+
+        const dest = './public/uploads/Profile-Pics/' + fname;
+        await sharp(image.buffer).resize({width: 570, height: 570}).toFile(dest);
+
+    }
+    catch(err){
+
+        console.log(err)
+    }
+
+    return fname;
+}
+
+
 const userSignup = async (req, res) => {
 
+    let fname = ''
+
+    if(req.file)
+    {
+        try{
+             fname = await upload_image(req.file);
+
+        }
+        catch(err){
+
+            console.log(err)
+        }   
+    }
+    else
+    {
+        fname = 'user.png'
+    }
+
+    
     const {user_username, user_email, user_password, user_phone_no} = req.body;
 
     try{
-        const customer = await User.create({user_username, user_email, user_password, user_phone_no})
-        res.status(200).json({customer: customer})
-    }   
-    catch(err) {
 
-        const errors = handleErrors(err)
-        res.json({errors: errors})
+        const customer = await User.create({user_username, user_email, user_password, user_phone_no, pro_image: fname})
+        res.status(200).json({customer: customer})
+
     }
+    catch(err){
+         const errors = handleErrors(err)
+            res.json({errors: errors})
+    }
+
+
+    
+    
 }   
 
 const userLogin = async(req, res) => {
@@ -70,3 +118,16 @@ export default {
     userSignup,
     userLogin
 }
+
+
+// const {user_username, user_email, user_password, user_phone_no} = req.body;
+
+//     try{
+//         const customer = await User.create({user_username, user_email, user_password, user_phone_no})
+//         res.status(200).json({customer: customer})
+//     }   
+//     catch(err) {
+
+//         const errors = handleErrors(err)
+//         res.json({errors: errors})
+//     }

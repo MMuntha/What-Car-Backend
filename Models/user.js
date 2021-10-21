@@ -34,6 +34,10 @@ const userSchema = new Schema({
         type: Number,
         default: 0
     },
+    pro_image: {
+        type: String,
+        required: true
+    },
     comments : [{
         
         commentedBy: String,

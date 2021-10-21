@@ -104,7 +104,7 @@ const addPost = async(req, res) => {
             yom : req.body.yom,
             milage : req.body.milage,
             transmission : req.body.transmission,
-            fueltype : req.body.fuelType,
+            fuelType : req.body.fuelType,
             image: fname,
             price : req.body.price,
             postedBy : req.body.postedBy,
